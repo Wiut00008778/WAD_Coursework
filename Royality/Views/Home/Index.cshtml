@@ -1,0 +1,201 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div ng-app="Royality">
+    <div ng-view></div>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+<script type="text/javascript">
+    angular
+        .module('Royality', ['ngRoute'])
+        .config(function ($routeProvider) {
+            $routeProvider
+                .when('/',
+                {
+                    templateUrl: 'pages/index.html',
+                    controller: 'IndexController'
+                })
+                .when('/watches',
+                {
+                    templateUrl: 'pages/watches.html',
+                    controller: 'WatchesController'
+                })
+                .when('/manufacturers',
+                {
+                    templateUrl: 'pages/manufacturers.html',
+                    controller: 'ManufacturersController'
+                })
+                .when('/addManufacturer',
+                {
+                    templateUrl: 'pages/addEditManufacturer.html',
+                    controller: 'AddManufacturerController'
+                })
+                .when('/editManufacturer/:manufacturerId',
+                    {
+                        templateUrl: 'pages/addEditManufacturer.html',
+                        controller: 'EditManufacturerController'
+                    })
+                .when('/addWatch',
+                    {
+                        templateUrl: 'pages/addEditWatch.html',
+                        controller: 'AddWatchController'
+                    })
+                .when('/editWatch/:watchId',
+                    {
+                        templateUrl: 'pages/addEditWatch.html',
+                        controller: 'EditWatchController'
+                    })
+                .otherwise({
+                    redirectTo: '/'
+                });
+        })
+        .controller('IndexController', ['$scope', '$http', function ($scope, $http) {
+            $scope.message = 'This is a sample web application for WAD CW';
+        }])
+        .controller('WatchesController', ['$scope', '$http', function ($scope, $http) {
+            $scope.watches = [];
+            $scope.manufacturers = [];
+
+            $scope.selectedManufacturer = null;
+
+            $http.get('@Url.Action("GetManufacturers", "Manufactureres")')
+                .then(function (response) {
+                    $scope.manufacturers = response.data;
+                });
+
+            $scope.GetWatches = function () {
+                var url = '@Url.Action("GetWatches", "Watches")';
+                if ($scope.selectedManufacturer) {
+                    url += '?manufacturerId=' + $scope.selectedManufacturer.id;
+                }
+                $http.get(url)
+                    .then(function (response) {
+                        $scope.watches = response.data;
+                    });
+            };
+
+            $scope.GetWatches(null);
+
+        }])
+        .controller('AddWatchController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+            $scope.watch =
+            {
+                id: 0,
+                modelName: '',
+                price: 0,
+                size: 0,
+                guaranteePeriod: 0,
+                location: '',
+                manufacturerId: 0
+            };
+
+            $scope.SaveWatch = function()
+            {
+                $http.post('@Url.Action("PostWatch", "Watches")/', $scope.watch)
+                    .then(function (response) {
+                        $location.path('/watches');//IM HERE
+                    })
+            }
+        }])
+
+        .controller('EditWatchController', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+            $scope.watch =
+            {
+                id: 0,
+                modelName: '',
+                price: 0,
+                size: 0,
+                guaranteePeriod: 0,
+                location: '',
+                manufacturerId: 0
+            };
+
+            $http.get('@Url.Action("GetWatches", "Watches")/' + $routeParams.watchId)
+                .then(function (response) {
+                    $scope.watch = response.data;
+                });
+
+            $scope.SaveWatch = function ()
+            {
+                $http.put('@Url.Action("GetWatches", "Watches")/' + $routeParams.watchId, $scope.watch)
+                    .then(function (response) {
+                        $location.path('/watches');
+                    })
+            }
+        }])
+         .controller('WatchesController', ['$scope', '$http', function ($scope, $http) {
+            $scope.watches = [];
+            $http.get('@Url.Action("GetWatches", "Watches")')
+                .then(function (response) {
+                    $scope.watches = response.data;
+                });
+
+             $scope.Delete = function (watch) {
+                 $http.delete("@Url.Action("GetWatches", "Watches")/" + watch.id).then(function (response) {
+                     var index = $scope.watches.indexOf(watch);
+                     $scope.watches.splice(index, 1);
+                    });
+                }
+        }])
+
+
+
+
+
+
+
+
+        .controller('ManufacturersController', ['$scope', '$http', function ($scope, $http) {
+            $scope.manufacturers = [];
+            $http.get('@Url.Action("GetManufacturers", "Manufacturers")')
+                .then(function (response) {
+                    $scope.manufacturers = response.data;
+                });
+
+            $scope.Delete = function (manufacturer) {
+                $http.delete("@Url.Action("GetManufacturers", "Manufacturers")/" + manufacturer.id).then(function (response){
+                    var index = $scope.manufacturers.indexOf(manufacturer);
+                    $scope.manufacturers.splice(index, 1);
+                    });
+                }
+        }])
+        .controller('AddManufacturerController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+            $scope.manufacturer =
+            {
+                id : 0,
+                name : ''
+            };
+
+            $scope.SaveManufacturer = function()
+            {
+                $http.post('@Url.Action("PostManufacturer", "Manufacturers")/', $scope.manufacturer)
+                    .then(function (response) {
+                        $location.path('/manufacturers');
+                    })
+            }
+        }])
+        .controller('EditManufacturerController', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+            $scope.manufacturer =
+            {
+                id : 0,
+                name : ''
+            };
+
+            $http.get('@Url.Action("GetManufacturers", "Manufacturers")/' + $routeParams.manufacturerId)
+                .then(function (response) {
+                    $scope.manufacturer = response.data;
+                });
+
+            $scope.SaveManufacturer = function ()
+            {
+                $http.put('@Url.Action("GetManufacturers", "Manufacturers")/' + $routeParams.manufacturerId, $scope.manufacturer)
+                    .then(function (response) {
+                        $location.path('/manufacturers');
+                    })
+            }
+        }]);
+
+</script>
