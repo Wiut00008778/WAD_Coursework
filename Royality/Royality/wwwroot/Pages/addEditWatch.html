@@ -1,0 +1,67 @@
+﻿
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+
+        </div>
+
+        <link href="../css/ValidationError.css" rel="stylesheet" />
+
+
+
+        <form ng-submit="submitForm()" name="frmWatch">
+            <div class="form-group">
+                <label for="ModelName">Model Name:</label>
+
+                <Input class="form-control" type="text" ng-model="watch.ModelName" name="cname" required ng-minlength="3" />
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.cname.$error.required">Model name is required</span>
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.cname.$error.minlength">Minimum length required is 3</span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="Price">Price:</label>
+
+                <Input type="number" class="form-control" ng-model="watch.Price" name="price" required min="0" max="999999999" />
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.price.$error.minlength">Minimum length required is 3</span>
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.price.$error.min">Minimum input value is 0</span>
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.price.$error.minlength">Maximum input value is 999999999</span>
+            </div>
+
+            <div class="form-group">
+                <label for="Size">Size:</label>
+
+                <Input type="number" id="Size" class="form-control" name="size" ng-model="watch.Size" min="0" />
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.size.$error.min">Minimum input value is 0</span>
+            </div>
+
+            <div class="form-group">
+                <label style="text-align: left" for="GuaranteePeriod">Guarantee Period:</label>
+
+                <Input type="number" class="form-control" ng-model="watch.GuaranteePeriod" name="guarantee" min="0" />
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.guarantee.$error.min">Minimum input value is 0</span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="Location">Location:</label>
+
+                <Input type="text" class="form-control" ng-model="watch.Location" name="location" required ng-minlength="5" />
+                <span class="error" ng-show="frmWatch.$dirty&&frmWatch.location.$error.minlength">Minimum length required is 5</span>
+            </div>
+
+            <div class="form-group">
+                <label for="ManufacturerId">Manufacturer Id:</label>
+
+                <input type="number" class="form-control" ng-model="watch.ManufacturerId" name="manid" min="0" />
+
+                <!--<span class="error" ng-show="frmWatch.$dirty&&frmWatch.manid.$error.min">Minimum input value is 0</span>-->
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" ng-click="SaveWatch() " />
+            </div>
+        </form>
+    </div>
+</div>

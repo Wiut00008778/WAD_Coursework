@@ -1,0 +1,26 @@
+﻿
+<div class="row">
+    <div class="col-md-4">
+        <!--<div class="form-group">
+        <label for="Name" class="control-label"></label>
+        <input ng-model="manufacturer.Name" placeholder="Name" type="text" />
+    </div>-->
+        <link href="../css/ValidationError.css" rel="stylesheet" />
+
+        <form ng-submit="submitForm()" name="frmCustomer">
+            <div>
+                <label for="Name">Name:</label>
+
+                <Input class="form-control" type="text" ng-model="manufacturer.Name" name="cname" required ng-minlength="3" />
+                <span class="error" ng-show="frmCustomer.$dirty&&frmCustomer.cname.$error.required">Manufacturer name is required</span>
+                <span class="error" ng-show="frmCustomer.$dirty&&frmCustomer.cname.$error.minlength">Minimum length required is 3</span>
+            </div>
+            <p></p>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" ng-disabled="myform.$invalid" ng-click="SaveManufacturer() " />
+            </div>
+        </form>
+
+    </div>
+</div>

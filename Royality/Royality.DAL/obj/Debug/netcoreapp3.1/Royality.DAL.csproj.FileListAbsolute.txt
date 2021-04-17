@@ -1,0 +1,9 @@
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\bin\Debug\netcoreapp3.1\Royality.DAL.deps.json
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\bin\Debug\netcoreapp3.1\Royality.DAL.dll
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.AssemblyInfo.cs
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\bin\Debug\netcoreapp3.1\Royality.DAL.pdb
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.dll
+C:\Users\Admin\Desktop\Level5\Semester 2\WAD\Royality\Royality.DAL\obj\Debug\netcoreapp3.1\Royality.DAL.pdb
